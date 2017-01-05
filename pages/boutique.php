@@ -14,6 +14,17 @@ if(isset($_GET['submit_categories'])) {
 ?>
 
 <div class="container">
+    <section id="message">
+            <?php if (isset($_GET['action']) && $_GET['code'] == 1) { ?>
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Félicitations ! </strong> L'article a correctement été ajouté à votre panier.
+            </div> <?php } else if (isset($_GET['action']) && $_GET['code'] == 2) { ?>
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Attention ! </strong> Il n'est pas possible d'ajouter plus de quantité pour cet article.
+            </div> <?php } ?>
+    </section>
     <div class="row">
         <div class="col-sm-12">
             <div class="col-sm-4">
@@ -39,63 +50,20 @@ if(isset($_GET['submit_categories'])) {
         </div>
     </div>
     <div class="row">
-    <br>
+        <br>
         <?php
-        $i = 0;
-        for ($i = 1; $i < $nbrP+1; $i++) { 
-            if($i == 1 || !$i%3) echo '<div class="col-sm-12">'; ?>
-                <div class="col-sm-4">
-                    <div class="thumbnail" >
-                        <?php $path = './lib/images/'.$liste_p[$i-1]->id_produit.'.jpg'; ?>
-                        <img src=<?php echo $path ?> class="img-thumbnail" style="width:200px;height:200px;">
-                        <div class="caption">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <h3 style="margin:5px auto;"><label>€ <?php print $liste_p[$i-1]->prix; ?></label></h3>
-                                </div>
-                                <div class="col-sm-4">
-                                    <a href="#" class="btn btn-success btn-product <?php if($liste_p[$i-1]->quantite == 0) echo 'disabled' ?>"><span class="glyphicon glyphicon-shopping-cart"></span> Ajouter au panier</a>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-8">
-                                    <p><?php print utf8_encode($liste_p[$i-1]->nom); ?></p>
-                                </div>
-                                <div class="col-sm-2">
-                                    <?php if($liste_p[$i-1]->quantite > 0) { ?><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" style="color:#79B947"></span> <?php } else { ?>
-                                        <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true" style="color:#E24D4E"></span> <?php } ?>
-                                    <?php print utf8_encode($liste_p[$i-1]->quantite); ?>
-                                </div>
-                            </div>
-                        </div>
+        for ($i = 1; $i < $nbrP+1; $i++) { ?>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <?php $path = './lib/images/products/'.$liste_p[$i-1]->id_produit.'.jpg'; ?>
+                    <img src=<?php echo $path ?> class="img-thumbnail" style="width:200px;height:200px;">
+                    <div class="caption">
+                        <h3 style="margin:5px auto;"><label>€ <?php print $liste_p[$i-1]->prix; ?></label></h3>
+                        <div id="overflow"><p style="font-size:80%;"><?php print utf8_encode($liste_p[$i-1]->nom); ?></p></div>
+                        <p><?php if($liste_p[$i-1]->quantite > 0) { ?><a class="btn btn-success"><span class="glyphicon glyphicon-heart"></span> <?php print utf8_encode($liste_p[$i-1]->quantite).' en stock'; ?></a> <?php } else { ?> <a class="btn btn-danger"><span class="glyphicon glyphicon-star-empty"></span><?php print 'Rupture de stock'; ?></a> <?php } ?> <a href="index.php?page=add_article&amp;id_produit=<?php echo $liste_p[$i-1]->id_produit; ?>" class="btn btn-info <?php if($liste_p[$i-1]->quantite == 0) echo 'disabled' ?>"><span class="glyphicon glyphicon-shopping-cart"></span> Acheter</a></p>
                     </div>
-                </div> 
-            <?php if($i == 0 || !$i%3) echo '</div>';
-            } ?>
+                </div>
+            </div>
+            <?php } ?>
     </div>
-</div>
-<!--<div class="row">
-    <div class="col-sm-3">
-        <span class="txtGras">Choisissez votre pays :</span>
-    </div>
-    <form action="<?php print $_SERVER['PHP_SELF']; ?>" method="get">
-        <div class="col-sm-3">
-            <select name="choix_pays" id="choix_pays">
-                <option value="1">Choisissez</option>
-                <?php
-                for ($i = 0; $i < $nbrP; $i++) {
-                    ?>                    
-                    <option value="<?php print $liste_p[$i]->pays; ?>">
-                        <?php print $liste_p[$i]->pays; ?>
-                    </option>
-                    <?php
-                }
-                ?>
-            </select>
-
-        </div>
-        <div class="col-sm-3">
-            <input type="submit" name="submit_pays" value="" id="submit_pays"/>
-        </div> 
-    </form>
 </div>

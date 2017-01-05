@@ -45,12 +45,12 @@ class ClientBD {
         try {
             $query = "select client_ajout(:nom,:prenom,:adresse,:ville,:telephone,:email,:password) as retour";
             $sql = $this->_db->prepare($query);
-            $sql->bindValue(':prenom', $prenom);
-            $sql->bindValue(':nom', $nom);
+            $sql->bindValue(':prenom', strtoupper($prenom));
+            $sql->bindValue(':nom', strtoupper($nom));
             $sql->bindValue(':email', $email);
             $sql->bindValue(':password', $password);
             $sql->bindValue(':adresse', $adresse);
-            $sql->bindValue(':ville', $ville);
+            $sql->bindValue(':ville', strtoupper($ville));
             $sql->bindValue(':telephone', $telephone);
             $sql->execute();
             $retour = $sql->fetchColumn(0);
@@ -60,11 +60,44 @@ class ClientBD {
         return $retour;
     }
 
-    public function getClientbyID($id) {
+    /*
+    *   fonction 'getClientById'
+    *   un paramètre représentant l'id du client
+    *   permet de rapidement récupérer un utilisateur par son identifiant
+    */
+
+    public function getClientById($id) {
         try {
-            $query = "SELECT * FROM client where id_cli=:id";
+            $query = "SELECT * FROM utilisateurs where id_utilisateur=:id";
             $resultset = $this->_db->prepare($query);
             $resultset->bindValue(1, $id);
+            $resultset->execute();
+            $data = $resultset->fetchAll();
+            $resultset->execute();
+        } catch (PDOException $e) {
+            print $e->getMessage();
+        }
+
+        while ($data = $resultset->fetch()) {
+            try {
+                $_infoArray[] = new Client($data);
+            } catch (PDOException $e) {
+                print $e->getMessage();
+            }
+        }
+        return $_infoArray;
+    }
+
+    /*
+    *   fonction 'getClients'
+    *   aucun paramètre
+    *   permet de rapidement récupérer la liste de tous les utilisateurs
+    */
+
+    public function getClients() {
+        try {
+            $query = "SELECT * FROM utilisateurs";
+            $resultset = $this->_db->prepare($query);
             $resultset->execute();
             $data = $resultset->fetchAll();
 
@@ -75,12 +108,40 @@ class ClientBD {
 
         while ($data = $resultset->fetch()) {
             try {
-                $_infoArray[] = new Festival($data);
+                $_infoArray[] = new Client($data);
             } catch (PDOException $e) {
                 print $e->getMessage();
             }
         }
         return $_infoArray;
+    }
+
+    /*
+    *   fonction 'updateClient'
+    *   plusieurs paramètres
+    *   permet de rapidement mettre à jour un utilisateur avec un $id donné
+    *   retour : -1 si aucun id trouvé, id si ok, -2 si erreur d'update
+    */
+
+    public function updateClient($id,$nom, $prenom, $email, $password, $adresse, $ville, $telephone) {
+        $retour = array();
+        try {
+            $query = "select client_update(:id,:nom,:prenom,:adresse,:ville,:telephone,:email,:password) as retour";
+            $sql = $this->_db->prepare($query);
+            $sql->bindValue(':id', $id);
+            $sql->bindValue(':prenom', strtoupper($prenom));
+            $sql->bindValue(':nom', strtoupper($nom));
+            $sql->bindValue(':email', $email);
+            $sql->bindValue(':password', $password);
+            $sql->bindValue(':adresse', $adresse);
+            $sql->bindValue(':ville', strtoupper($ville));
+            $sql->bindValue(':telephone', $telephone);
+            $sql->execute();
+            $retour = $sql->fetchColumn(0);
+        } catch (PDOException $e) {
+            print "Echec de la requête de mise à jour de client." . $e;
+        }
+        return $retour;
     }
 
 }

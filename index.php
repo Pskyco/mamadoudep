@@ -7,13 +7,15 @@ $cnx = Connexion::getInstance($dsn, $user, $pass);
 session_start();
 
 if (isset($_POST['login'])) {
-	$data = new ClientBD($cnx);
-	$retour = $data->isClient($_POST['email'], $_POST['password']);
-	if ($retour != 0) {
-		$_SESSION['client'] = $retour;
-	}
+    $data = new ClientBD($cnx);
+    $retour = $data->isClient($_POST['email'], $_POST['password']);
+    if ($retour != 0) {
+        $_SESSION['client'] = $retour;
+        $userAuthentifie = $data->getClientById($retour);
+        $_SESSION['client'] = $userAuthentifie;
+    }
 } else {
-	$retour = -1;
+    $retour = -1;
 }
 ?>
 
@@ -36,11 +38,10 @@ if (isset($_POST['login'])) {
 
     <body>
 		<div class="container">
-			
 			<header>
 			<?php
-			if (file_exists('./lib/php/header_client.php')) {
-				include ('./lib/php/header_client.php');
+			if (file_exists('./lib/php/header.php')) {
+				include ('./lib/php/header.php');
 			}
 			?>
 			</header>
@@ -61,7 +62,7 @@ if (isset($_POST['login'])) {
 				} else if ($retour == -1 && !isset($_SESSION['client']) && !isset($_POST['submitInscription'])) {
 					?> <div class="alert alert-info alert-dismissible" role="alert">
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<strong>Hé ho !</strong> Connectez-vous pour profiter pleinemnt du site <a href="#" data-toggle="modal" data-target="#login-modal" class="alert-link">en cliquant ici</a> !
+					<strong>Hé ho !</strong> Connectez-vous pour profiter pleinement du site <a href="#" data-toggle="modal" data-target="#login-modal" class="alert-link">en cliquant ici</a> !
 					</div> <?php
 				} else if ($retour == 0) {
 					?> <div class="alert alert-danger alert-dismissible" role="alert">
@@ -85,8 +86,8 @@ if (isset($_POST['login'])) {
 			</section>
 			<footer class="footer">
 				<?php
-				if (file_exists('./admin/lib/php/footer.php')) {
-					include ('./admin/lib/php/footer.php');
+				if (file_exists('./lib/php/footer.php')) {
+					include ('./lib/php/footer.php');
 				}
 				?>  
 			</footer>
