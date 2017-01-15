@@ -32,6 +32,12 @@ class ComporteBD extends Comporte {
         return $retour;
     }
 
+    /*
+    *   fonction 'getComporteNumberByFacture'
+    *   un paramètre représentant l'id de la facture
+    *   retourne le nombre de lignes pour la facture à l'id $id
+    *   = nbr de produits différents
+    */
     public function getComporteNumberByFacture($id) {
         try {
             $query = "SELECT sum(quantite) from comporte where fk_facture = :id";
@@ -48,6 +54,11 @@ class ComporteBD extends Comporte {
         return $retour;
     }
 
+    /*
+    *   fonction 'getComporteByFacture'
+    *   un paramètre représentant l'id de la facture
+    *   retourne tous les produits présents dans la facture $id
+    */
     public function getComporteByFacture($id) {
         try {
             $query = "SELECT * FROM comporte WHERE fk_facture = :id";

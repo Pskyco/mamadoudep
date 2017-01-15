@@ -33,6 +33,12 @@ class ProduitsBD extends Produits {
         return $retour;
     }
 
+    /*
+    *   fonction 'deleteProduit'
+    *   un paramètre représentant l'id de produit
+    *   permet de rapidement supprimer un produit identifié par l'id $id
+    */
+
     public function deleteProduit($id) {
         $retour = array();
         try {
@@ -47,9 +53,12 @@ class ProduitsBD extends Produits {
         return $retour;
     }
 
-    //action = 1 => increment
-    //action = 0 => decrement
-    //retour = -1 => pas trouvé, id = trouvé
+    /*
+    *   fonction 'changeStock'
+    *   deux paramètres : l'id du produit à modifier, l'action à réaliser (0 = -, 1 = +)
+    *   permet d'incrémenter ou de décrémenter le stock d'un produit
+    *   retourne -1 si le produit n'est pas trouvé, l'id du produit s'il est trouvé
+    */
     public function changeStock($id,$action) {
         $retour = array();
         try {
@@ -65,6 +74,11 @@ class ProduitsBD extends Produits {
         return $retour;
     }
 
+    /*
+    *   fonction 'updateProduit'
+    *   3 paramètres : l'id du produit, le nom et le prix
+    *   permet de rapidement modifier les détails d'un produit
+    */
     public function updateProduit($id,$nom,$prix) {
         $retour = array();
         try {
@@ -81,6 +95,11 @@ class ProduitsBD extends Produits {
         return $retour;
     }
 
+    /*
+    *   fonction 'getProduits'
+    *   aucun paramètre
+    *   permet d'obtenir tous les produits, ordonnées par id_produit croissant
+    */
     public function getProduits() {
         try {
             $query = "SELECT * FROM produits ORDER BY id_produit";
@@ -103,6 +122,12 @@ class ProduitsBD extends Produits {
         return $_infoArray;
     }
 
+    /*
+    *   fonction 'getProduit'
+    *   un paramètre représentant l'id de produit
+    *   obtient toutes les infos concernant le produit avec l'id_produit $id
+    *   retourne -1 si pas trouvé
+    */
     public function getProduit($id) {
         try {
             $query = "SELECT * FROM produits where id_produit = :id";
@@ -126,6 +151,11 @@ class ProduitsBD extends Produits {
         return $_infoArray;
     }
 
+    /*
+    *   fonction 'getProduitsByCategorie'
+    *   un paramètre représentant l'id de la catégorie
+    *   retourne tous les produits présents dans cette catégorie
+    */
     public function getProduitsByCategorie($id) {
         try {
             $query = "SELECT * FROM produits where fk_categorie = :id";

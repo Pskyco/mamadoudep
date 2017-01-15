@@ -30,6 +30,17 @@ class FacturesBD extends Factures {
         return $retour;
     }
 
+    /*
+    *   fonction 'incrementStatus'
+    *   un paramètre représentant l'id de la facture
+    *   permet d'incrémenter le status de la facture
+    * 0 en attente de paiement
+    * 1 paiement accepté
+    * 2 en préparation
+    * 3 en cours de livraison
+    * 4 Livré
+    */
+
     public function incrementStatus($id) {
         $retour = array();
         try {
@@ -43,6 +54,13 @@ class FacturesBD extends Factures {
         }
         return $retour;
     }
+
+    /*
+    *   fonction 'getFactures'
+    *   aucun paramètre
+    *   retourne la liste des factures actuellement dans la DB
+    *   ordonné par état (0 -> 4)
+    */
 
     public function getFactures() {
         try {
@@ -66,6 +84,13 @@ class FacturesBD extends Factures {
         return $_infoArray;
     }
 
+    /*
+    *   fonction 'getFactureById'
+    *   un paramètre représentant l'id de la facture
+    *   permet d'obtenir la facture identifiée par l'id $id
+    *   retourne 0 si aucune facture trouvée
+    */
+
     public function getFactureById($id) {
         try {
             $query = "SELECT * FROM factures WHERE id_facture = :id";
@@ -88,6 +113,12 @@ class FacturesBD extends Factures {
         }
         return $_infoArray;
     }
+
+        /*
+    *   fonction 'incrementStatus'
+    *   un paramètre représentant l'id de l'utilisateur
+    *   permet d'obtenir la liste des factures détenues par un client
+    */
 
     public function getFacturesByUtilisateur($id) {
         try {

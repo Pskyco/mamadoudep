@@ -49,6 +49,11 @@ class CategoriesBD extends Categories {
         return $retour;
     }
 
+    /*
+    *   fonction 'getCategories'
+    *   aucun paramètre
+    *   retourne la liste des catégories présentes dans la db
+    */
     public function getCategories() {
         try {
             $query = "SELECT * FROM categories";

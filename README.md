@@ -4,7 +4,10 @@ Site de vente en ligne de pièces automobiles.
 
 Créateur : Ludwig Pskyco
 
-Changelog du 15/01/2017,
+Changelog du 15/01/2017 v1.3.1,
+- Documentation des classes DB
+
+Changelog du 15/01/2017 v1.3.0,
 
 - Fix d'un bug sur la modification de profil
 - Fix des messages de confirmation de commandes
