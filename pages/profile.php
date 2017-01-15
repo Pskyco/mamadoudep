@@ -1,4 +1,5 @@
 <?php
+// Fonction visant à supprimer les accents de l'adresse qui est entrée
 function str_to_noaccent($str)
 {
     $url = $str;
@@ -24,7 +25,7 @@ if (isset($_POST['submitUpdateProfile'])) {
     //on détecte si les mots de passe ont bien été ré-inscrits
     $erreur = false;
     $changement = false;
-    if(isset($_POST['pwd']) && isset($_POST['pwd2'])) {
+    if(!empty($_POST['pwd'] && !empty($_POST['pwd2']))) {
     	if($_POST['pwd'] == $_POST['pwd2']) {
     		//les deux mots de passes sont identiques
     		//on détecte s'il y a un changement de données
@@ -46,7 +47,7 @@ if (isset($_POST['submitUpdateProfile'])) {
 
     		if($changement) {
 			    $cli = new ClientBD($cnx);
-    			$retourClient = $cli->updateClient($_SESSION['client'][0]->id_utilisateur,$_POST['nom'],$_POST['prenom'],$_POST['mail'],$_POST['pwd'],str_to_noaccent($_POST['rue']),$_POST['ville'],$_POST['tel']);
+    			$retourClient = $cli->updateClient($_SESSION['client'][0]->id_utilisateur,$_POST['nom'],$_POST['prenom'],$_POST['mail'],$_POST['pwd'],str_to_noaccent($_POST['rue']),str_to_noaccent($_POST['ville']),$_POST['tel']);
     			switch($retourClient) {
     				case -1 : $erreurMessage = 'Une erreur inconnue est survenue :O';
     				break;
@@ -75,7 +76,7 @@ if (isset($_POST['submitUpdateProfile'])) {
 	<div class="col-md-12">
 		<section id="message">
 			<?php if ($changement || $erreur) { ?>
-			<div class="alert alert-<?php if($changement) echo 'info'; else echo 'danger'; ?> alert-dismissible" role="alert">
+			<div class="alert alert-<?php if($changement) echo 'success'; else echo 'danger'; ?> alert-dismissible" role="alert">
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<strong><?php if ($erreur) echo 'Erreur !'; else echo 'Bien...'; ?></strong> <?php echo $erreurMessage; ?>
 			</div> <?php } ?>
@@ -104,13 +105,13 @@ if (isset($_POST['submitUpdateProfile'])) {
 				<div class="form-group">
 					<label for="pwd" class="col-sm-3 control-label">Mot de passe</label>
 					<div class="col-sm-9">
-						<input type="password" id="pwd" name="pwd" placeholder="indiquez un mot de passe" class="form-control" >
+						<input type="password" id="pwd" name="pwd" value="" placeholder="indiquez un mot de passe" class="form-control" >
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="pwd2" class="col-sm-3 control-label">Confirmer le mot de passe</label>
 					<div class="col-sm-9">
-						<input type="password" id="pwd2" name="pwd2" placeholder="confirmez votre mot de passe" class="form-control" >
+						<input type="password" id="pwd2" name="pwd2" value="" placeholder="confirmez votre mot de passe" class="form-control" >
 					</div>
 				</div>
 				<div class="form-group">

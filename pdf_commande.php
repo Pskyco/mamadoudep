@@ -68,7 +68,7 @@ for($i=0 ; $i < $nbrComporte ; $i++) {
     $pdf->MultiCell(10,8,iconv('UTF-8', 'windows-1252', $comporte[$i]->quantite),1,'C');
     $pdf->SetY($position_detail);
     $pdf->SetX(176);
-    $pdf->MultiCell(24,8,iconv('UTF-8', 'windows-1252', $produit[0]->prix*$comporte[$i]->quantite.' €'),1,'R');
+    $pdf->MultiCell(24,8,iconv('UTF-8', 'windows-1252', $comporte[$i]->prix*$comporte[$i]->quantite.' €'),1,'R');
     $position_detail += 8;
 }
 $pdf->Ln(7);

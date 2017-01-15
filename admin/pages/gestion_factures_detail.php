@@ -18,7 +18,7 @@
 	}
 
 	$newPrice = $false;
-	if($total != $facture[0]->total) $newPrice = true;
+	if($total - $facture[0]->total != 0.0) $newPrice = true;
 
 	$cli = new ClientBD($cnx);
 	$client = $cli->getClientById($numeroClient);
@@ -100,7 +100,7 @@
 						<td><?php echo $nbrPieces; ?></td>
 					</tr>
 					<tr>
-						<td colspan="4">Visualiser la facture</td>
+						<td colspan="4"><a href='http://mamadou-depannage.ddns.net/pdf_commande.php?&amp;facture=<?php print $numeroFacture ?>' target="_blank" class="btn btn-sm btn-info"><span class="glyphicon glyphicon-search"></span> Visualiser la facture</a></td>
 					</tr>
 				</tbody>
 			</table>
@@ -108,7 +108,7 @@
 				<?php if ($newPrice) { ?>
 				<div class="alert alert-info alert-dismissible" role="alert">
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<strong>Attention !</strong> Les prix ont subit des récentes modifications, ils ne sont plus représentatifs de la facture !
+					<strong>Attention !</strong> Les prix ont subit des modifications depuis l'émission de la facture.
 				</div> <?php } ?>
 			</section>
 			<table class="table table-striped">
@@ -128,7 +128,7 @@
 						<th scope="row"><?php print $listeComporte[$i]->fk_produit; ?></th>
 						<td><?php print $produit[0]->nom; ?></td>
 						<td><?php print $listeComporte[$i]->quantite; ?></td>
-						<td><?php print $produit[0]->prix.' €'; ?></td>
+						<td><?php print $listeComporte[$i]->prix.' €'; ?></td>
 					</tr>
 					<?php } ?>
 				</tbody>
