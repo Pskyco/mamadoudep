@@ -99,7 +99,7 @@
 				<?php for($i=0;$i<$nbrPro;$i++) { ?>
 				<tr>
 				   <th scope="row"><?php print $liste_pro[$i]->id_produit; ?></th>
-				   <td><?php print utf8_encode($liste_pro[$i]->nom); ?></td>
+				   <td><?php print $liste_pro[$i]->nom; ?></td>
 				   <td><?php print utf8_encode($liste_pro[$i]->quantite); ?></td>
 				   <td><?php print utf8_encode($liste_pro[$i]->prix).' €'; ?></td>
 				   <td>

@@ -28,7 +28,7 @@
         <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
         Gestion factures
         </a></li>
-        <li><a href="./index.php?page=gestion_articles_accueil">
+        <li><a href="./index.php?page=gestion_utilisateurs_accueil">
         <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
         Gestion utilisateurs
         </a></li>

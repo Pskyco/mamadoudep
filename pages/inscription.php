@@ -1,7 +1,7 @@
 <?php
 if (isset($_POST['submitInscription'])) {
     $data = new ClientBD($cnx);
-    $retourInscription = $data->ajoutClient($_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['password'], $_POST['adresse'], $_POST['ville'], $_POST['telephone']);;
+    $retourInscription = $data->ajoutClient($_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['password'], $_POST['rue'], $_POST['ville'], $_POST['telephone']);;
 } else {
 	$retourInscription = -3;
 }
@@ -56,9 +56,9 @@ if (isset($_POST['submitInscription'])) {
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="adresse" class="col-sm-3 control-label">Rue</label>
+		<label for="rue" class="col-sm-3 control-label">Rue</label>
 		<div class="col-sm-9">
-			<input type="text" id="adresse" name="adresse" placeholder="votre rue" class="form-control">
+			<input type="text" id="rue" name="rue" placeholder="votre rue" class="form-control">
 		</div>
 	</div>
 	<div class="form-group">

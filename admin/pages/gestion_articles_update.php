@@ -58,7 +58,7 @@
 					<div class="form-group">
 						<label for="nom" class="col-sm-3 control-label">Nom de l'article</label>
 						<div class="col-sm-9">
-							<input type="text" id="nom" name="nom" placeholder="indiquez un nom d'article" value="<?php echo utf8_encode($produit[0]->nom); ?>" class="form-control" >
+							<input type="text" id="nom" name="nom" placeholder="indiquez un nom d'article" value="<?php echo $produit[0]->nom; ?>" class="form-control" >
 						</div>
 					</div>
 					<div class="form-group">

@@ -96,7 +96,7 @@ class ClientBD {
 
     public function getClients() {
         try {
-            $query = "SELECT * FROM utilisateurs";
+            $query = "SELECT * FROM utilisateurs order by id_utilisateur";
             $resultset = $this->_db->prepare($query);
             $resultset->execute();
             $data = $resultset->fetchAll();
@@ -123,10 +123,10 @@ class ClientBD {
     *   retour : -1 si aucun id trouvé, id si ok, -2 si erreur d'update
     */
 
-    public function updateClient($id,$nom, $prenom, $email, $password, $adresse, $ville, $telephone) {
+    public function updateClient($id,$nom, $prenom, $email, $password, $adresse, $ville, $telephone, $admin) {
         $retour = array();
         try {
-            $query = "select client_update(:id,:nom,:prenom,:adresse,:ville,:telephone,:email,:password) as retour";
+            $query = "select client_update(:id,:nom,:prenom,:adresse,:ville,:telephone,:email,:password,:admin) as retour";
             $sql = $this->_db->prepare($query);
             $sql->bindValue(':id', $id);
             $sql->bindValue(':prenom', strtoupper($prenom));
@@ -136,10 +136,11 @@ class ClientBD {
             $sql->bindValue(':adresse', $adresse);
             $sql->bindValue(':ville', strtoupper($ville));
             $sql->bindValue(':telephone', $telephone);
+            $sql->bindValue(':admin', boolval($admin),PDO::PARAM_BOOL);
             $sql->execute();
             $retour = $sql->fetchColumn(0);
         } catch (PDOException $e) {
-            print "Echec de la requête de mise à jour de client." . $e;
+            print "Echec de la requête de mise à jour de client." . utf8_encode($e);
         }
         return $retour;
     }
