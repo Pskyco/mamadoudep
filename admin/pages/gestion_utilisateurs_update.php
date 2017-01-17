@@ -54,14 +54,22 @@ if (isset($_POST['submitUpdateProfile'])) {
     		if($changement) {
 			    $cli = new ClientBD($cnx);
     			$retourClient = $cli->updateClient($user[0]->id_utilisateur,$_POST['nom'],$_POST['prenom'],$_POST['mail'],$_POST['pwd'],str_to_noaccent($_POST['rue']),str_to_noaccent($_POST['ville']),$_POST['tel'],boolval($_POST['admin']));
+    			$erreur = true;
+    			$changement = false;
     			switch($retourClient) {
-    				case -1 : $erreurMessage = 'Une erreur inconnue est survenue :O';
+    				case -1 : $erreurMessage = 'Bizarre.. nous n\'avons pas trouvé votre identifiant ?!';
     				break;
-    				case -2 : $erreurMessage = 'Une erreur est survenue lors de la mise à jour du profil :(';
+    				case -2 : $erreurMessage = 'Cette adresse mail est déjà répertoriée dans notre base de données.';
+    				break;
+    				case -3 : $erreurMessage = 'Ce numéro de téléphone est déjà répertorié dans notre base de données.';
+    				break;
+    				case -4 : $erreurMessage = 'Une erreur est survenue lors de la mise à jour.';
     				break;
     				default : {
+    					$erreur = false;
+    					$changement = true;
     					$erreurMessage = 'Le profil a correctement été mis à jour ! :)';
-					    $user = $utilisateur->getClientById($id_utilisateur);
+					    $_SESSION['client'] = $cli->getClientById($_SESSION['client'][0]->id_utilisateur);
 					}
     			};
     		} else {

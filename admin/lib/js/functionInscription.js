@@ -9,15 +9,74 @@ $(document).ready(function () {
         rules: {
             nom: "required",
             prenom: "required",
-            email: "required",
-			password: "required",
-			password2: {
-				required: true,
-                equalTo: "#password"
+            email: "required email",
+            ville: "required",
+            rue: "required",
+            pwd: {
+                required: true,
+                minlength: 7
             },
-            telephone: {
+            pwd2: {
+                required: true,
+                equalTo: "#pwd"
+            },
+            tel: {
                 required: true,
                 regex: /^\+[34][123][0-9]{8,9}$/
+            },
+            submitHandler: function (form) {
+                form.submit();
+            }
+        }
+    });
+
+    $("#form_update_profile").validate({
+        rules: {
+            nom: "required",
+            prenom: "required",
+            email: "required email",
+            ville: "required",
+            rue: "required",
+            pwd: {
+                required: true,
+                minlength: 7
+            },
+            pwd2: {
+                required: true,
+                equalTo: "#pwd"
+            },
+            tel: {
+                required: true,
+                regex: /^\+[34][123][0-9]{8,9}$/
+            },
+            submitHandler: function (form) {
+                form.submit();
+            }
+        }
+    });
+
+    $("#form_admin_update_profile").validate({
+        rules: {
+            nom: "required",
+            prenom: "required",
+            email: "required email",
+            ville: "required",
+            rue: "required",
+            pwd: {
+                required: true,
+                minlength: 7
+            },
+            pwd2: {
+                required: true,
+                equalTo: "#pwd"
+            },
+            tel: {
+                required: true,
+                regex: /^\+[34][123][0-9]{8,9}$/
+            },
+            admin: {
+                required: true,
+                range: [0, 1]
             },
             submitHandler: function (form) {
                 form.submit();

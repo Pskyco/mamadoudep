@@ -1,7 +1,7 @@
 <?php
 if (isset($_POST['submitInscription'])) {
     $data = new ClientBD($cnx);
-    $retourInscription = $data->ajoutClient($_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['password'], $_POST['rue'], $_POST['ville'], $_POST['telephone']);;
+    $retourInscription = $data->ajoutClient($_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['pwd'], $_POST['rue'], $_POST['ville'], $_POST['tel']);;
 } else {
 	$retourInscription = -3;
 }
@@ -10,7 +10,7 @@ if (isset($_POST['submitInscription'])) {
 	<?php if ($retourInscription == -1) { ?>
 	<div class="alert alert-danger alert-dismissible" role="alert">
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		<strong>Erreur !</strong> Vous êtes déjà inscrit sur notre site, vous allez être redirigé vers l'accueil...
+		<strong>Erreur !</strong> Cette adresse mail ou ce numéro de téléphone est déjà enregistré, vous allez être redirigé vers l'accueil...
 	</div> <meta http-equiv="refresh" content="4; url=index.php?page=accueil" /> <?php } else if ($retourInscription == -2) { ?>
 	<div class="alert alert-danger alert-dismissible" role="alert">
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -44,15 +44,15 @@ if (isset($_POST['submitInscription'])) {
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="password" class="col-sm-3 control-label">Mot de passe</label>
+		<label for="pwd" class="col-sm-3 control-label">Mot de passe</label>
 		<div class="col-sm-9">
-			<input type="password" id="password" name="password" placeholder="votre mot de passe" class="form-control">
+			<input type="password" id="pwd" name="pwd" placeholder="votre mot de passe" class="form-control">
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="password2" class="col-sm-3 control-label">Confirmation</label>
+		<label for="pwd2" class="col-sm-3 control-label">Confirmation</label>
 		<div class="col-sm-9">
-			<input type="password" id="password2" name="password2" placeholder="confirmez votre mot de passe" class="form-control">
+			<input type="password" id="pwd2" name="pwd2" placeholder="confirmez votre mot de passe" class="form-control">
 		</div>
 	</div>
 	<div class="form-group">
@@ -68,9 +68,9 @@ if (isset($_POST['submitInscription'])) {
 		</div>
 	</div>
 	<div class="form-group">
-		<label for="telephone" class="col-sm-3 control-label">Téléphone</label>
+		<label for="tel" class="col-sm-3 control-label">Téléphone</label>
 		<div class="col-sm-9">
-			<input type="text" id="telephone" name="telephone" placeholder="votre numéro de téléphone au format +32498822101" class="form-control">
+			<input type="text" id="tel" name="tel" placeholder="votre numéro de téléphone au format +32498822101" class="form-control">
 		</div>
 	</div>
 	<div class="form-group">

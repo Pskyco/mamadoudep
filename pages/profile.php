@@ -48,12 +48,20 @@ if (isset($_POST['submitUpdateProfile'])) {
     		if($changement) {
 			    $cli = new ClientBD($cnx);
     			$retourClient = $cli->updateClient($_SESSION['client'][0]->id_utilisateur,$_POST['nom'],$_POST['prenom'],$_POST['mail'],$_POST['pwd'],str_to_noaccent($_POST['rue']),str_to_noaccent($_POST['ville']),$_POST['tel'],$_SESSION['client'][0]->admin);
+    			$erreur = true;
+    			$changement = false;
     			switch($retourClient) {
-    				case -1 : $erreurMessage = 'Une erreur inconnue est survenue :O';
+    				case -1 : $erreurMessage = 'Bizarre.. nous n\'avons pas trouvé votre identifiant ?!';
     				break;
-    				case -2 : $erreurMessage = 'Une erreur est survenue lors de la mise à jour du profil :(';
+    				case -2 : $erreurMessage = 'Cette adresse mail est déjà répertoriée dans notre base de données.';
+    				break;
+    				case -3 : $erreurMessage = 'Ce numéro de téléphone est déjà répertorié dans notre base de données.';
+    				break;
+    				case -4 : $erreurMessage = 'Une erreur est survenue lors de la mise à jour.';
     				break;
     				default : {
+    					$erreur = false;
+    					$changement = true;
     					$erreurMessage = 'Le profil a correctement été mis à jour ! :)';
 					    $_SESSION['client'] = $cli->getClientById($_SESSION['client'][0]->id_utilisateur);
 					}
@@ -78,7 +86,7 @@ if (isset($_POST['submitUpdateProfile'])) {
 			<?php if ($changement || $erreur) { ?>
 			<div class="alert alert-<?php if($changement) echo 'success'; else echo 'danger'; ?> alert-dismissible" role="alert">
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<strong><?php if ($erreur) echo 'Erreur !'; else echo 'Bien...'; ?></strong> <?php echo $erreurMessage; ?>
+				<strong><?php if ($erreur) echo 'Erreur !'; else echo 'Succès !'; ?></strong> <?php echo $erreurMessage; ?>
 			</div> <?php } ?>
 		</section>
 	    <div class="profile-content">

@@ -4,6 +4,15 @@ Site de vente en ligne de pièces automobiles.
 
 Créateur : Ludwig Pskyco
 
+Changelog du 17/01/2017 v1.3.3,
+- Correction d'un bug dans les validateurs JQuery ;
+- Gestion des informations "doublons" dans la modification de profil
+-- Une erreur en clair était affichée lorsque l'on tentait de duppliquer une entrée 'tel' ou 'mail' (modif profil)
+-- Elle est désormais gérée correctement avec un message d'erreur Bootstrap
+- Fix d'une faille qui affichait en clair le msg d'erreur lorsque l'ont duppliquait une entrée 'tel' ou 'mail' (inscription)
+- L'affichage des factures est désormais croissant selon l'état ET l'id_facture
+- Les produits de la boutique sont désormais affichés par ordre croissant d'id_produit
+
 Changelog du 15/01/2017 v1.3.2,
 - Corrections d'UTF8 dans la gestion des articles
 - Préparation du JQuerry AJAX d'auto-complétion par adresse mail (panel admin)

@@ -158,7 +158,7 @@ class ProduitsBD extends Produits {
     */
     public function getProduitsByCategorie($id) {
         try {
-            $query = "SELECT * FROM produits where fk_categorie = :id";
+            $query = "SELECT * FROM produits where fk_categorie = :id order by id_produit";
             $resultset = $this->_db->prepare($query);
             $resultset->bindValue(1, $id);
             $resultset->execute();

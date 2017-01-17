@@ -64,7 +64,7 @@ class FacturesBD extends Factures {
 
     public function getFactures() {
         try {
-            $query = "SELECT * FROM factures order by etat";
+            $query = "SELECT * FROM factures order by etat, id_facture";
             $resultset = $this->_db->prepare($query);
             $resultset->execute();
             $data = $resultset->fetchAll();
