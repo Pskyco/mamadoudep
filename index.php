@@ -24,15 +24,12 @@ if (isset($_POST['login'])) {
         <title>Mamadou Dépannage - Pourquoi aller voir ailleurs ?</title>     
         <link rel="stylesheet" type="text/css" href="./admin/lib/css/bootstrap-3.3.7/dist/css/bootstrap.css" />
         <link rel="stylesheet" type="text/css" href="./admin/lib/css/style.css"/>
+        <link rel="icon" href="./admin/lib/css/favicon.ico" />
         <script src="admin/lib/js/jquery-3.1.1.js"></script>
+        <script src="admin/lib/js/allJavascriptFunctions.js" type="text/javascript"></script>
+        <script src="admin/lib/js/bootbox.min.js" type="text/javascript"></script>
         <script src="admin/lib/js/jquery-validation-1.15.0/dist/jquery.validate.min.js" type="text/javascript"></script>
         <script src="admin/lib/css/bootstrap-3.3.7/dist/js/bootstrap.js" type="text/javascript"></script>
-        <script src="admin/lib/js/functionsDetailCom.js" type="text/javascript"></script>
-        <script src="admin/lib/js/functionsJqueryAdmin.js" type="text/javascript"></script>
-		<script src="admin/lib/js/bootstrap-notify-master/bootstrap-notify.js" type="text/javascript"></script>
-        <script src="admin/lib/js/messagesValidator.js" type="text/javascript"></script>
-        <script src="admin/lib/js/functionInscription.js" type="text/javascript"></script>
-        <script src="admin/lib/js/functionArticles.js" type="text/javascript"></script>
         <meta charset='UTF-8'/>
     </head>
 

@@ -21,15 +21,11 @@
         <title>Mamadou Dépannage - Pourquoi aller voir ailleurs ?</title>     
         <link rel="stylesheet" type="text/css" href="./lib/css/bootstrap-3.3.7/dist/css/bootstrap.css" />
         <link rel="stylesheet" type="text/css" href="./lib/css/style.css"/>
+        <link rel="icon" href="./lib/css/favicon.ico" />
         <script src="./lib/js/jquery-3.1.1.js"></script>
+        <script src="./lib/js/jquery-ui-1.12.1/jquery-ui.min.js"></script>
         <script src="./lib/js/jquery-validation-1.15.0/dist/jquery.validate.min.js" type="text/javascript"></script>
-        <script src="./lib/css/bootstrap-3.3.7/dist/js/bootstrap.js" type="text/javascript"></script>
-        <script src="./lib/js/functionsDetailCom.js" type="text/javascript"></script>
-        <script src="./lib/js/functionsJqueryAdmin.js" type="text/javascript"></script>
-        <script src="./lib/js/bootstrap-notify-master/bootstrap-notify.js" type="text/javascript"></script>
-        <script src="./lib/js/messagesValidator.js" type="text/javascript"></script>
-        <script src="./lib/js/functionInscription.js" type="text/javascript"></script>
-        <script src="./lib/js/functionArticles.js" type="text/javascript"></script>
+        <script src="./lib/js/allJavascriptFunctions.js" type="text/javascript"></script>
         <script src="./lib/js/bootbox.min.js" type="text/javascript"></script>
         <meta charset='UTF-8'/>
     </head>

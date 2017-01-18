@@ -1,6 +1,6 @@
 <?php
 
-class JSONClientDB
+class JsonClientDB
 {
 
     private $_db;
@@ -13,7 +13,7 @@ class JSONClientDB
 
     public function getClient($email)
     {
-        $query = "select * from utilisateurs where mail=:email";
+        $query = "select * from utilisateurs where mail = :email";
         try {
             $resultset = $this->_db->prepare($query);
             $resultset->bindValue(1, $email, PDO::PARAM_STR);
@@ -31,5 +31,6 @@ class JSONClientDB
         }
         return $_clientArray;
     }
+
 
 }

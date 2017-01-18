@@ -1,8 +1,4 @@
 <?php
-$id_utilisateur = $_GET['id'];
-$utilisateur = new ClientBD($cnx);
-$user = $utilisateur->getClientById($id_utilisateur);
-
 //fonction visant à supprimer les accents de l'adresse qui est entrée
 function str_to_noaccent($str)
 {
@@ -26,34 +22,37 @@ function str_to_noaccent($str)
 }
 
 if (isset($_POST['submitUpdateProfile'])) {
+	$id_utilisateur = $_POST['id_admin'];
+	$utilisateur = new ClientBD($cnx);
+	$user = $utilisateur->getClientById($id_utilisateur);
     //on détecte si les mots de passe ont bien été ré-inscrits
     $erreur = false;
     $changement = false;
-    if(!empty($_POST['pwd'])) {
-    	if($_POST['pwd']) {
+    if(!empty($_POST['pwd_admin'])) {
+    	if($_POST['pwd_admin']) {
     		//les deux mots de passes sont identiques
     		//on détecte s'il y a un changement de données
-    		if($_POST['nom'] != $user[0]->nom) {
+    		if($_POST['nom_admin'] != $user[0]->nom) {
     			$changement = true;
-    		} else if($_POST['prenom'] != $user[0]->prenom) {
+    		} else if($_POST['prenom_admin'] != $user[0]->prenom) {
     			$changement = true;
-    		} else if($_POST['mail'] != $user[0]->mail) {
+    		} else if($_POST['mail_admin'] != $user[0]->mail) {
     			$changement = true;
-    		} else if($_POST['pwd'] != $user[0]->pwd) {
+    		} else if($_POST['pwd_admin'] != $user[0]->pwd) {
     			$changement = true;
-    		} else if(str_to_noaccent($_POST['rue']) != str_to_noaccent(utf8_encode($user[0]->rue))) {
+    		} else if(str_to_noaccent($_POST['rue_admin']) != str_to_noaccent(utf8_encode($user[0]->rue))) {
     			$changement = true;
-    		} else if($_POST['ville'] != $user[0]->ville) {
+    		} else if($_POST['ville_admin'] != $user[0]->ville) {
 				$changement = true;
-    		} else if($_POST['tel'] != $user[0]->tel) {
+    		} else if($_POST['tel_admin'] != $user[0]->tel) {
 				$changement = true;
-    		} else if($_POST['admin'] != $user[0]->admin) {
+    		} else if($_POST['admin_admin'] != $user[0]->admin) {
 				$changement = true;
     		}
 
     		if($changement) {
 			    $cli = new ClientBD($cnx);
-    			$retourClient = $cli->updateClient($user[0]->id_utilisateur,$_POST['nom'],$_POST['prenom'],$_POST['mail'],$_POST['pwd'],str_to_noaccent($_POST['rue']),str_to_noaccent($_POST['ville']),$_POST['tel'],boolval($_POST['admin']));
+    			$retourClient = $cli->updateClient($id_utilisateur,$_POST['nom_admin'],$_POST['prenom_admin'],$_POST['mail_admin'],$_POST['pwd_admin'],str_to_noaccent($_POST['rue_admin']),str_to_noaccent($_POST['ville_admin']),$_POST['tel_admin'],boolval($_POST['admin_admin']));
     			$erreur = true;
     			$changement = false;
     			switch($retourClient) {
@@ -84,7 +83,6 @@ if (isset($_POST['submitUpdateProfile'])) {
     }
 }
 ?>
-
 <div class="row">
 	<?php include('./lib/php/gestion_utilisateurs_menu.php'); ?>
 	<div class="col-md-9">
@@ -96,59 +94,65 @@ if (isset($_POST['submitUpdateProfile'])) {
 			</div> <?php } ?>
 		</section>
 	    <div class="profile-content">
-		   <form class="form-horizontal" action="index.php?page=gestion_utilisateurs_update&id=<?php echo $user[0]->id_utilisateur?>" method="post" id="form_admin_update_profile">
-				<legend>Modificaiton du profil utilisateur</legend>
+		   <form class="form-horizontal" action="index.php?page=gestion_utilisateurs_search" method="post" id="form_admin_update_profile">
+				<legend>Modificaiton du profil de l'utilisateur</legend>
 				<div class="form-group">
-					<label for="nom" class="col-sm-3 control-label">Nom</label>
+					<label for="id" class="col-sm-3 control-label">Identifiant</label>
 					<div class="col-sm-9">
-						<input type="text" id="nom" name="nom" placeholder="indiquez un nom" value="<?php echo $user[0]->nom; ?>" class="form-control" >
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="prenom" class="col-sm-3 control-label">Prénom</label>
-					<div class="col-sm-9">
-						<input type="text" id="prenom" name="prenom" placeholder="indiquez un prenom" value="<?php echo $user[0]->prenom; ?>" class="form-control" >
+						<input type="text" id="id_admin" name="id_admin" placeholder="Inscrivez d'abord une adresse mail !" class="form-control" readonly >
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="mail" class="col-sm-3 control-label">Adresse mail</label>
 					<div class="col-sm-9">
-						<input type="email" id="mail" name="mail" placeholder="indiquez une adresse mail" value="<?php echo $user[0]->mail; ?>" class="form-control" >
+						<input type="email" id="mail_admin" name="mail_admin" placeholder="indiquez une adresse mail" class="form-control" >
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="nom" class="col-sm-3 control-label">Nom</label>
+					<div class="col-sm-9">
+						<input type="text" id="nom_admin" name="nom_admin" placeholder="indiquez un nom" class="form-control" disabled >
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="prenom" class="col-sm-3 control-label">Prénom</label>
+					<div class="col-sm-9">
+						<input type="text" id="prenom_admin" name="prenom_admin" placeholder="indiquez un prenom" class="form-control" disabled >
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="pwd" class="col-sm-3 control-label">Mot de passe</label>
 					<div class="col-sm-9">
-						<input type="password" id="pwd" name="pwd" value="<?php echo $user[0]->pwd; ?>" placeholder="indiquez un mot de passe" class="form-control" >
+						<input type="password" id="pwd_admin" name="pwd_admin" value="" placeholder="indiquez un mot de passe" class="form-control" disabled >
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="rue" class="col-sm-3 control-label">Rue</label>
 					<div class="col-sm-9">
-						<input type="text" id="rue" name="rue" placeholder="indiquez votre rue" value="<?php echo utf8_encode($user[0]->rue); ?>" class="form-control" >
+						<input type="text" id="rue_admin" name="rue_admin" placeholder="indiquez votre rue" class="form-control" disabled >
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="ville" class="col-sm-3 control-label">Ville</label>
 					<div class="col-sm-9">
-						<input type="text" id="ville" name="ville" placeholder="indiquez votre ville" value="<?php echo $user[0]->ville; ?>" class="form-control" >
+						<input type="text" id="ville_admin" name="ville_admin" placeholder="indiquez votre ville" class="form-control" disabled >
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="tel" class="col-sm-3 control-label">Téléphone</label>
 					<div class="col-sm-9">
-						<input type="tel" id="tel" name="tel" placeholder="indiquez un numéro de téléphone" value="<?php echo $user[0]->tel; ?>" class="form-control" >
+						<input type="tel" id="tel_admin" name="tel_admin" placeholder="indiquez un numéro de téléphone" class="form-control" disabled >
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="admin" class="col-sm-3 control-label">Administrateur</label>
 					<div class="col-sm-9">
-						<input type="number" id="admin" name="admin" placeholder="indiquez 0 ou 1" value="<?php echo $user[0]->admin; ?>" class="form-control" >
+						<input type="number" id="admin_admin" name="admin_admin" placeholder="indiquez 0 ou 1" class="form-control" disabled >
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-9 col-sm-offset-3">
-						<button type="submit" name="submitUpdateProfile" id="submitUpdateProfile" class="btn btn-primary btn-block">Mettre à jour le profil</button>
+						<button type="submit" name="submitUpdateProfile" id="submitUpdateProfile" class="btn btn-primary btn-block" disabled>Mettre à jour le profil</button>
 					</div>
 				</div>
 			</form> <!-- /form -->

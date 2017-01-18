@@ -7,17 +7,6 @@
 	<?php include('./lib/php/gestion_utilisateurs_menu.php'); ?>
 	<div class="col-md-9">
         <div class="profile-content">
-            <div id="custom-search-input">
-                <div class="input-group col-md-12">
-                    <input type="text" class="form-control input-sm" placeholder="rechercher un client..." />
-                    <span class="input-group-btn">
-                        <button class="btn btn-info btn-sm" type="button">
-                            <i class="glyphicon glyphicon-search"></i>
-                        </button>
-                    </span>
-                </div>
-            </div>
-            <br>
 			<table class="table table-striped">
 			  <thead>
 			    <tr>

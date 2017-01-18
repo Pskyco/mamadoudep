@@ -23,6 +23,11 @@
 						<i class="glyphicon glyphicon-home"></i>
 						Gestion des utilisateurs </a>
 					</li>
+					<li>
+						<a href="index.php?page=gestion_utilisateurs_search">
+						<i class="glyphicon glyphicon-zoom-in"></i>
+						Quick update </a>
+					</li>
 				</ul>
 			</div>
 			<!-- END MENU -->
