@@ -58,7 +58,7 @@ if(isset($_GET['submit_categories'])) {
         for ($i = 1; $i < $nbrP+1; $i++) { ?>
             <div class="col-sm-6 col-md-4">
                 <div class="thumbnail">
-                    <?php $path = './lib/images/products/'.$liste_p[$i-1]->id_produit.'.jpg'; ?>
+                    <?php $path = './admin/lib/images/products/'.$liste_p[$i-1]->id_produit.'.jpg'; ?>
                     <img src=<?php echo $path ?> class="img-thumbnail" style="width:200px;height:200px;">
                     <div class="caption">
                         <h3 style="margin:5px auto;"><label>€ <?php print $liste_p[$i-1]->prix; ?></label></h3>

@@ -4,17 +4,22 @@ Site de vente en ligne de pièces automobiles.
 
 Créateur : Ludwig Pskyco
 
-Changelog du 18/01/2017 v1.3.4 & v1.3.5,
-- Modification du dropdown de la boutique, passage en bootstrap
-- Ajout d'une option "TOUTES CATEGORIES" pour de nouveau afficher l'ensemble des articles de la boutique
+Changelog du 18/01/2017,
+v1.3.6
+- déplacement des images produits dans les dossiers admins
+v1.3.5
 - Les produits sont désormais affichés par ordre d'id produit ET d'id catégorie
 - nettoyage des scripts JS et regroupement dans un seul fichier unique contenant tous les scripts
 - ajout d'un favicon
 - jquery/ajax d'auto-complete fonctionnels pour le quick update du panel admin
 - suppression de la "confirmation du mot de passe" dans le panel admin
 - fix d'un bug qui remplaçait la valeur de session lors d'une update user dans le panel admin
+v1.3.4
+- Modification du dropdown de la boutique, passage en bootstrap
+- Ajout d'une option "TOUTES CATEGORIES" pour de nouveau afficher l'ensemble des articles de la boutique
 
-Changelog du 17/01/2017 v1.3.3,
+Changelog du 17/01/2017,
+v1.3.3
 - Correction d'un bug dans les validateurs JQuery ;
 - Gestion des informations "doublons" dans la modification de profil
 -- Une erreur en clair était affichée lorsque l'on tentait de duppliquer une entrée 'tel' ou 'mail' (modif profil)
@@ -23,7 +28,8 @@ Changelog du 17/01/2017 v1.3.3,
 - L'affichage des factures est désormais croissant selon l'état ET l'id_facture
 - Les produits de la boutique sont désormais affichés par ordre croissant d'id_produit
 
-Changelog du 15/01/2017 v1.3.2,
+Changelog du 15/01/2017,
+v1.3.2
 - Corrections d'UTF8 dans la gestion des articles
 - Préparation du JQuerry AJAX d'auto-complétion par adresse mail (panel admin)
 - Modification des utilisateurs (panel admin)
@@ -34,12 +40,9 @@ Changelog du 15/01/2017 v1.3.2,
 -- car un bindParam prends de base un paramètre String, et transforme donc "true" en "1" et "false" en ""
 - Mise à jour des messages de validation JQuery
 - Validation JQuery sur les formulaires d'inscription, de modification de profil (user/admin)
-
-Changelog du 15/01/2017 v1.3.1,
+v1.3.1
 - Documentation des classes DB
-
-Changelog du 15/01/2017 v1.3.0,
-
+v1.3.0
 - Fix d'un bug sur la modification de profil
 - Fix des messages de confirmation de commandes
 - Ajout d'une colonne "prix" dans la table comporte
