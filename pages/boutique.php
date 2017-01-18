@@ -8,8 +8,14 @@ $liste_c = $categories->getCategories();
 $nbrC = count($liste_c);
 
 if(isset($_GET['submit_categories'])) {
-    $liste_p = $produits->getProduitsByCategorie($_GET['choix_categories']);
-    $nbrP = count($liste_p);
+    //retour de functionArticles.js
+    if($_GET['choix_categories'] != 999) {
+        $liste_p = $produits->getProduitsByCategorie($_GET['choix_categories']);
+        $nbrP = count($liste_p);
+    } else {
+        $liste_p = $produits->getProduits();
+        $nbrP = count($liste_p);
+    }
 }
 ?>
 
@@ -27,26 +33,23 @@ if(isset($_GET['submit_categories'])) {
     </section>
     <div class="row">
         <div class="col-sm-12">
-            <div class="col-sm-4">
-                <span class="txtGras">Choisissez une catégorie: </span>
-            </div>
-            <div class="col-sm-4">
-                <form action="<?php print $_SERVER['PHP_SELF']; ?>" method="get">
-                    <select name="choix_categories" id="choix_categories">
-                        <option value="1">Choisissez</option>
+            <form action="<?php print $_SERVER['PHP_SELF']; ?>" method="get">
+                <label>Choisissez une catégorie</label>
+                <select name="choix_categories" id="choix_categories" class="form-control">
+                    <option value="1">Sélectionnez une option dans le menu déroulant...</option>
+                    <option value="999">TOUTES CATEGORIES</option>
+                    <?php
+                    for ($i = 0; $i < $nbrC; $i++) {
+                        ?>                    
+                        <option value="<?php print $liste_c[$i]->id_categorie; ?>">
+                            <?php print $liste_c[$i]->nom; ?>
+                        </option>
                         <?php
-                        for ($i = 0; $i < $nbrC; $i++) {
-                            ?>                    
-                            <option value="<?php print $liste_c[$i]->id_categorie; ?>">
-                                <?php print $liste_c[$i]->nom; ?>
-                            </option>
-                            <?php
-                        }
-                        ?>
-                    </select>
-                    <input type="submit" name="submit_categories" value="" id="submit_categories"/>
-                </form>
-            </div> 
+                    }
+                    ?>
+                </select>
+                <input type="submit" name="submit_categories" value="" id="submit_categories"/>
+            </form>
         </div>
     </div>
     <div class="row">

@@ -4,6 +4,11 @@ Site de vente en ligne de pièces automobiles.
 
 Créateur : Ludwig Pskyco
 
+Changelog du 18/01/2017 v1.3.4,
+- Modification du dropdown de la boutique, passage en bootstrap
+- Ajout d'une option "TOUTES CATEGORIES" pour de nouveau afficher l'ensemble des articles de la boutique
+- 
+
 Changelog du 17/01/2017 v1.3.3,
 - Correction d'un bug dans les validateurs JQuery ;
 - Gestion des informations "doublons" dans la modification de profil
